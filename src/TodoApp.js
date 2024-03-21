@@ -2,6 +2,7 @@ import React from 'react';
 import './TodoApp.css';
 import upArrow from './upArrow.png'; // Importer l'image de flèche vers le haut
 import downArrow from './downArrow.png';
+import Header from "./Header";
 
 class TodoApp extends React.Component {
     constructor(props) {
@@ -89,6 +90,7 @@ class TodoApp extends React.Component {
     render() {
         return (
             <div>
+                <Header task={this.state.items.length} checked={this.state.items.filter(item => !item.isChecked).length}/>
                 <h2>Todos:</h2>
                 <ol>
                     {this.state.items.map((item, index) => (
@@ -102,8 +104,6 @@ class TodoApp extends React.Component {
                     ))}
                 </ol>
                 <div>
-                    <span>Il y a {this.state.items.length} tâches et {this.state.items.filter(item => !item.isChecked).length} en attente</span>
-                    <br />
                     <input type="text" value={this.state.newTaskTitle} onChange={this.handleInputChange} />
                     <button onClick={this.add}>Ajouter</button>
                 </div>
