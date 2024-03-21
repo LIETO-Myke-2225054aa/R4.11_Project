@@ -6,15 +6,15 @@ import downArrow from './downArrow.png';
 class TodoApp extends React.Component {
     constructor(props) {
         super(props);
+        const storedItems = JSON.parse(localStorage.getItem('items'));
         this.state = {
-            items: [
-                { text: "Learn JavaScript", done: false },
-                { text: "Learn React", done: false },
-                { text: "Play around in JSFiddle", done: true },
-                { text: "Build something awesome", done: true }
-            ],
+            items: storedItems || [],
             newTaskTitle: ""
         };
+    }
+
+    updateLocalStorage = () => {
+        localStorage.setItem('items', JSON.stringify(this.state.items));
     }
 
     add = () => {
@@ -23,10 +23,12 @@ class TodoApp extends React.Component {
         }
         this.setState({
             items: [
-                { text: this.state.newTaskTitle, done: false },
+                { Title: this.state.newTaskTitle, isChecked: false },
                 ...this.state.items
             ],
             newTaskTitle: "" // Réinitialiser le champ d'entrée après l'ajout de la tâche
+        }, () => {
+            this.updateLocalStorage();
         });
     }
 
@@ -34,11 +36,13 @@ class TodoApp extends React.Component {
         this.setState(prevState => {
             const updatedItems = prevState.items.map((item, i) => {
                 if (i === index) {
-                    return { ...item, done: !item.done };
+                    return { ...item, isChecked: !item.isChecked };
                 }
                 return item;
             });
             return { items: updatedItems };
+        }, () => {
+            this.updateLocalStorage();
         });
     }
 
@@ -51,6 +55,8 @@ class TodoApp extends React.Component {
             const items = [...prevState.items];
             items.splice(index, 1);
             return { items };
+        }, () => {
+            this.updateLocalStorage();
         });
     }
 
@@ -62,6 +68,8 @@ class TodoApp extends React.Component {
             updatedItems[index] = updatedItems[index - 1];
             updatedItems[index - 1] = temp;
             return { items: updatedItems };
+        }, () => {
+            this.updateLocalStorage();
         });
     }
 
@@ -73,6 +81,8 @@ class TodoApp extends React.Component {
             updatedItems[index] = updatedItems[index + 1];
             updatedItems[index + 1] = temp;
             return { items: updatedItems };
+        }, () => {
+            this.updateLocalStorage();
         });
     }
 
@@ -83,8 +93,8 @@ class TodoApp extends React.Component {
                 <ol>
                     {this.state.items.map((item, index) => (
                         <li key={index}>
-                            <input type="checkbox" checked={item.done} onChange={() => this.check(index)} />
-                            <span className={item.done ? "done" : ""}>{item.text}</span>
+                            <input type="checkbox" checked={item.isChecked} onChange={() => this.check(index)} />
+                            <span className={item.isChecked ? "isChecked" : ""}>{item.Title}</span>
                             <button onClick={() => this.delete(index)}>Supprimer</button>
                             <img src={upArrow} className="arrow-icon" onClick={() => this.moveUp(index)}/>
                             <img src={downArrow} className="arrow-icon" onClick={() => this.moveDown(index)}/>
@@ -92,7 +102,7 @@ class TodoApp extends React.Component {
                     ))}
                 </ol>
                 <div>
-                    <span>Il y a {this.state.items.length} tâches et {this.state.items.filter(item => !item.done).length} en attente</span>
+                    <span>Il y a {this.state.items.length} tâches et {this.state.items.filter(item => !item.isChecked).length} en attente</span>
                     <br />
                     <input type="text" value={this.state.newTaskTitle} onChange={this.handleInputChange} />
                     <button onClick={this.add}>Ajouter</button>
