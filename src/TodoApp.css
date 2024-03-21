@@ -1,0 +1,49 @@
+/* Style pour la liste des tâches */
+ol {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Style pour chaque élément de la liste */
+li {
+    margin-bottom: 10px;
+}
+
+/* Style pour les cases à cocher */
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Style pour les tâches terminées */
+.done {
+    text-decoration: line-through;
+}
+
+/* Style pour le champ d'entrée et le bouton */
+input[type="text"] {
+    padding: 5px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+.todo-item {
+    display: flex; /* Utilisation d'un modèle de boîte flexible */
+    align-items: center; /* Alignement vertical des éléments */
+    margin-bottom: 5px; /* Espacement entre chaque élément */
+}
+.arrow-icon {
+    width: 20px;
+    height: 20px;
+}
