@@ -3,6 +3,7 @@ import './TodoApp.css';
 import upArrow from './upArrow.png'; // Importer l'image de flèche vers le haut
 import downArrow from './downArrow.png';
 import Header from "./Header";
+import Footer from "./Footer";
 
 class TodoApp extends React.Component {
     constructor(props) {
@@ -87,13 +88,20 @@ class TodoApp extends React.Component {
         });
     }
 
+    searchTasks = (query) => {
+        const regex = new RegExp(query, 'i'); // 'i' pour insensible à la casse
+        return this.state.items.filter(item => regex.test(item.Title));
+    }
+
     render() {
+        const { newTaskTitle } = this.state;
+        const tasks = this.searchTasks(newTaskTitle);
         return (
             <div>
                 <Header task={this.state.items.length} checked={this.state.items.filter(item => !item.isChecked).length}/>
                 <h2>Todos:</h2>
                 <ol>
-                    {this.state.items.map((item, index) => (
+                    {tasks.map((item, index) => (
                         <li key={index}>
                             <input type="checkbox" checked={item.isChecked} onChange={() => this.check(index)} />
                             <span className={item.isChecked ? "isChecked" : ""}>{item.Title}</span>
@@ -104,8 +112,7 @@ class TodoApp extends React.Component {
                     ))}
                 </ol>
                 <div>
-                    <input type="text" value={this.state.newTaskTitle} onChange={this.handleInputChange} />
-                    <button onClick={this.add}>Ajouter</button>
+                    <Footer add={this.add} newTaskTitle={this.state.newTaskTitle} handleInputChange={this.handleInputChange} />
                 </div>
             </div>
         );
