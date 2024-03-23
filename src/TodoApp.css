@@ -12,6 +12,7 @@ li {
 /* Style pour les cases à cocher */
 input[type="checkbox"] {
     margin-right: 10px;
+    cursor: pointer;
 }
 
 /* Style pour les tâches terminées */
@@ -46,7 +47,10 @@ button:hover {
 .arrow-icon {
     width: 20px;
     height: 20px;
+    cursor: pointer;
+
 }
+
 /* Modal.css */
 
 .modal-open {
