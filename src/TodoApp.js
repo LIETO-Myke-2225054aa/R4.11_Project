@@ -4,6 +4,7 @@ import upArrow from './upArrow.png'; // Importer l'image de flèche vers le haut
 import downArrow from './downArrow.png';
 import Header from "./Header";
 import Footer from "./Footer";
+import Modal from "./Modal"; // Importer le composant Modal
 
 class TodoApp extends React.Component {
     constructor(props) {
@@ -11,7 +12,8 @@ class TodoApp extends React.Component {
         const storedItems = JSON.parse(localStorage.getItem('items'));
         this.state = {
             items: storedItems || [],
-            newTaskTitle: ""
+            newTaskTitle: "",
+            showModal: false // Ajouter un état pour contrôler l'affichage de la pop-up
         };
     }
 
@@ -19,17 +21,45 @@ class TodoApp extends React.Component {
         localStorage.setItem('items', JSON.stringify(this.state.items));
     }
 
+    // add = () => {
+    //     if (this.state.newTaskTitle.trim() === "") {
+    //         return; // Empêcher l'ajout d'une tâche vide
+    //     }
+    //     this.setState({
+    //         items: [
+    //             { Title: this.state.newTaskTitle, isChecked: false },
+    //             ...this.state.items
+    //         ],
+    //         newTaskTitle: "" // Réinitialiser le champ d'entrée après l'ajout de la tâche
+    //     }, () => {
+    //         this.updateLocalStorage();
+    //     });
+    // }
+
     add = () => {
-        if (this.state.newTaskTitle.trim() === "") {
+        // Ouvrir la pop-up
+        this.setState({
+            showModal: true
+        });
+    }
+
+    handleCloseModal = () => {
+        // Fermer la pop-up
+        this.setState({
+            showModal: false
+        });
+    }
+
+    handleAddTask = (title) => {
+        if (title.trim() === "") {
             return; // Empêcher l'ajout d'une tâche vide
         }
-        this.setState({
-            items: [
-                { Title: this.state.newTaskTitle, isChecked: false },
-                ...this.state.items
-            ],
-            newTaskTitle: "" // Réinitialiser le champ d'entrée après l'ajout de la tâche
-        }, () => {
+        // Ajouter la nouvelle tâche à la liste des tâches
+        const newTask = { Title: title, isChecked: false };
+        this.setState(prevState => ({
+            items: [newTask, ...prevState.items],
+            showModal: false // Fermer la pop-up après l'ajout de la tâche
+        }), () => {
             this.updateLocalStorage();
         });
     }
@@ -94,7 +124,7 @@ class TodoApp extends React.Component {
     }
 
     render() {
-        const { newTaskTitle } = this.state;
+        const { newTaskTitle, showModal } = this.state;
         const tasks = this.searchTasks(newTaskTitle);
         return (
             <div>
@@ -111,12 +141,19 @@ class TodoApp extends React.Component {
                         </li>
                     ))}
                 </ol>
-                <div>
-                    <Footer add={this.add} newTaskTitle={this.state.newTaskTitle} handleInputChange={this.handleInputChange} />
-                </div>
+                {showModal && (
+                    <Modal
+                        isOpen={showModal}
+                        handleClose={() => this.setState({ showModal: false })}
+                        handleAddTask={this.handleAddTask} // Assurez-vous de passer la fonction handleAddTask à la modal
+                    />
+                )}
+                <Footer add={this.add} newTaskTitle={newTaskTitle} handleInputChange={this.handleInputChange} />
             </div>
         );
     }
 }
 
 export default TodoApp;
+
+
