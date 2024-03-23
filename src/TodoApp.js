@@ -1,12 +1,19 @@
 import React from 'react';
-import './TodoApp.css';
-import upArrow from './upArrow.png'; // Importer l'image de flèche vers le haut
-import downArrow from './downArrow.png';
-import Header from "./Header";
-import Footer from "./Footer";
-import Modal from "./Modal"; // Importer le composant Modal
+import './assets/styles/TodoApp.css';
+import upArrow from './assets/imgs/upArrow.png'; // Importer l'image de flèche vers le haut
+import downArrow from './assets/imgs/downArrow.png';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Modal from "./components/Modal"; // Importer le composant Modal
 
+/**
+ * Composant principal représentant l'application Todo.
+ */
 class TodoApp extends React.Component {
+    /**
+     * Constructeur du composant TodoApp.
+     * @param {object} props - Les propriétés passées au composant.
+     */
     constructor(props) {
         super(props);
         const storedItems = JSON.parse(localStorage.getItem('items'));
@@ -17,25 +24,16 @@ class TodoApp extends React.Component {
         };
     }
 
+    /**
+     * Met à jour le localStorage avec les tâches.
+     */
     updateLocalStorage = () => {
         localStorage.setItem('items', JSON.stringify(this.state.items));
     }
 
-    // add = () => {
-    //     if (this.state.newTaskTitle.trim() === "") {
-    //         return; // Empêcher l'ajout d'une tâche vide
-    //     }
-    //     this.setState({
-    //         items: [
-    //             { Title: this.state.newTaskTitle, isChecked: false },
-    //             ...this.state.items
-    //         ],
-    //         newTaskTitle: "" // Réinitialiser le champ d'entrée après l'ajout de la tâche
-    //     }, () => {
-    //         this.updateLocalStorage();
-    //     });
-    // }
-
+    /**
+     * Ouvre la fenêtre modale pour ajouter une nouvelle tâche.
+     */
     add = () => {
         // Ouvrir la pop-up
         this.setState({
@@ -43,13 +41,10 @@ class TodoApp extends React.Component {
         });
     }
 
-    handleCloseModal = () => {
-        // Fermer la pop-up
-        this.setState({
-            showModal: false
-        });
-    }
-
+    /**
+     * Ajoute une nouvelle tâche à la liste des tâches.
+     * @param {string} title - Le titre de la tâche à ajouter.
+     */
     handleAddTask = (title) => {
         if (title.trim() === "") {
             return; // Empêcher l'ajout d'une tâche vide
@@ -64,6 +59,10 @@ class TodoApp extends React.Component {
         });
     }
 
+    /**
+     * Marque une tâche comme complétée ou non.
+     * @param {number} index - L'index de la tâche à modifier.
+     */
     check = (index) => {
         this.setState(prevState => {
             const updatedItems = prevState.items.map((item, i) => {
@@ -78,10 +77,18 @@ class TodoApp extends React.Component {
         });
     }
 
+    /**
+     * Met à jour l'état du champ de saisie du titre de la nouvelle tâche.
+     * @param {object} e - L'événement de changement de champ de saisie.
+     */
     handleInputChange = (e) => {
         this.setState({ newTaskTitle: e.target.value });
     };
 
+    /**
+     * Supprime une tâche de la liste des tâches.
+     * @param {number} index - L'index de la tâche à supprimer.
+     */
     delete = (index) => {
         this.setState(prevState => {
             const items = [...prevState.items];
@@ -92,6 +99,10 @@ class TodoApp extends React.Component {
         });
     }
 
+    /**
+     * Déplace une tâche vers le haut dans la liste.
+     * @param {number} index - L'index de la tâche à déplacer.
+     */
     moveUp = (index) => {
         if (index === 0) return; // Ne rien faire si l'élément est déjà en haut de la liste
         this.setState(prevState => {
@@ -105,6 +116,10 @@ class TodoApp extends React.Component {
         });
     }
 
+    /**
+     * Déplace une tâche vers le bas dans la liste.
+     * @param {number} index - L'index de la tâche à déplacer.
+     */
     moveDown = (index) => {
         if (index === this.state.items.length - 1) return; // Ne rien faire si l'élément est déjà en bas de la liste
         this.setState(prevState => {
@@ -118,11 +133,20 @@ class TodoApp extends React.Component {
         });
     }
 
+    /**
+     * Recherche les tâches correspondant à un critère de recherche donné.
+     * @param {string} query - Le critère de recherche.
+     * @returns {array} - Tableau des tâches correspondant à la recherche.
+     */
     searchTasks = (query) => {
         const regex = new RegExp(query, 'i'); // 'i' pour insensible à la casse
         return this.state.items.filter(item => regex.test(item.Title));
     }
 
+    /**
+     * Rendu du composant TodoApp.
+     * @returns {JSX.Element} Élément JSX représentant TodoApp.
+     */
     render() {
         const { newTaskTitle, showModal } = this.state;
         const tasks = this.searchTasks(newTaskTitle);

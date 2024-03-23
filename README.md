@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# TodoApp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Un exemple d'application Todo réalisé avec React.
 
-## Available Scripts
+## Fonctionnalités
 
-In the project directory, you can run:
+- Ajouter une tâche
+- Cocher une tâche pour la marquer comme terminée
+- Supprimer une tâche
+- Déplacer une tâche vers le haut ou vers le bas
+- Rechercher une tâche par titre
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Clonez ce dépôt sur votre machine locale.
+2. Dans le répertoire du projet, exécutez `npm install` pour installer les dépendances.
+3. Ensuite, lancez l'application avec `npm start`.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Utilisation
 
-### `npm test`
+- Pour ajouter une nouvelle tâche, cliquez sur le bouton "Ajouter une tâche" en bas de la liste.
+- Pour marquer une tâche comme terminée, cochez la case à côté de la tâche.
+- Pour supprimer une tâche, cliquez sur le bouton "Supprimer" à côté de la tâche.
+- Pour déplacer une tâche vers le haut ou vers le bas, cliquez sur les flèches correspondantes.
+- Pour rechercher une tâche par titre, saisissez le titre dans le champ de recherche en bas de la liste.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Structure du Projet
 
-### `npm run build`
+- **src/** : Le répertoire racine du code source de l'application.
+    - **assets/** : Contient les ressources statiques telles que les images.
+        - **imgs/** : Contient les images utilisées dans l'application.
+            - `downArrow.png` : Image de la flèche vers le bas.
+            - `upArrow.png` : Image de la flèche vers le haut.
+    - **styles/** : Contient les fichiers de styles CSS de l'application.
+        - `TodoApp.css` : Styles spécifiques au composant TodoApp.
+    - **components/** : Contient les composants React de l'application.
+        - `Footer.js` : Composant de pied de page.
+        - `Header.js` : Composant d'en-tête.
+        - `Modal.js` : Composant de la fenêtre modale.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    - `index.js` : Point d'entrée de l'application React.
+    - `TodoApp.js` : Composant principal de l'application Todo.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## License
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Ce projet est sous licence MIT. Veuillez consulter le fichier LICENSE pour plus de détails.

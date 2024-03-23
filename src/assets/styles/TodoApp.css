@@ -19,6 +19,9 @@ input[type="checkbox"] {
 .done {
     text-decoration: line-through;
 }
+.isChecked {
+    text-decoration: line-through;
+}
 
 /* Style pour le champ d'entrée et le bouton */
 input[type="text"] {
@@ -35,14 +38,14 @@ button {
     cursor: pointer;
     margin: 10px;
 }
-
 button:hover {
     background-color: #0056b3;
 }
+
 .todo-item {
-    display: flex; /* Utilisation d'un modèle de boîte flexible */
-    align-items: center; /* Alignement vertical des éléments */
-    margin-bottom: 5px; /* Espacement entre chaque élément */
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
 }
 .arrow-icon {
     width: 20px;
@@ -60,21 +63,21 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
-    z-index: 999; /* Assurez-vous que la modal est au-dessus de tous les autres éléments */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 
 .modal-closed {
-    display: none; /* Cacher la modal par défaut */
+    display: none;
 }
 
 .modal-content {
     background-color: #fff;
     width: 400px;
-    margin: 50px auto; /* Centrer la modal horizontalement */
+    margin: 50px auto;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ombre légère */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .modal-content h2 {
@@ -99,7 +102,7 @@ button:hover {
 
 .modal-content button {
     padding: 10px 20px;
-    background-color: #007bff; /* Bleu */
+    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -107,6 +110,6 @@ button:hover {
 }
 
 .modal-content button:hover {
-    background-color: #0056b3; /* Bleu foncé au survol */
+    background-color: #0056b3;
 }
 
